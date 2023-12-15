@@ -1,5 +1,4 @@
 <template>
-    <button varient="danger">Hello</button>
     <div class="myclass">
       <ul v-for="item in myarray" :key="item.id">
         <li>{{ item.id }}</li>
