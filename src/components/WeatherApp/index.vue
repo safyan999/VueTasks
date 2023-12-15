@@ -1,5 +1,11 @@
 <template>
-<div id="weather_APP">
+<div id="weather_APP"  
+:class="{
+    sunny: typeof weather.main != 'undefined' && weather.weather[0].main.toLowerCase().includes('clear') ,
+      cloud: typeof weather.main != 'undefined' && weather.weather[0].main.toLowerCase().includes('cloud'),
+      smoke: typeof weather.main != 'undefined' && weather.weather[0].main.toLowerCase().includes('smoke'),
+ }"
+>
     <main>
         <div class="search-box">
             <input type="text" class="search-bar" placeholder="seach......." v-model="query" @keypress="fetchWeather" />
@@ -12,8 +18,8 @@
             </div>
 
             <div class="weather-box">
-                <div class="temp">{{ weather.main.temp }}°C</div>
-                <div class="weather">Rain</div>
+                <div class="temp">{{Math.round(weather.main.temp) }}°C</div>
+                <div class="weather">{{weather.weather[0].main}}</div>
             </div>
         </div>
 
@@ -75,7 +81,7 @@ body {
 }
 
 #weather_APP {
-    /* background-image: url('../../assets/logo.png'); */
+    /* background-image: url('../../assets/sunny.jpg');  */
     background-size: cover;
     background-position: bottom;
     transition: 0.45;
@@ -159,5 +165,14 @@ main {
     font-weight: 700;
     font-style: italic;
     text-shadow: 3px 6px rgba(0, 0, 0, 0.25);
+}
+#weather_APP.sunny{
+    background-image: url('../../assets/sunny.jpg'); 
+}
+.cloud{
+    background-image: url('../../assets/cloud.jpg'); 
+}
+.smoke{
+    background-image: url('../../assets/smoke.jpg'); 
 }
 </style>
